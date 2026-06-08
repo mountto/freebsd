@@ -1,0 +1,50 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../teonho.github.io"
+		},
+		{
+			"path": "../g-p-nh-t"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"string.h": "c",
+			"random": "c",
+			"util.h": "c",
+			"string": "c",
+			"unistd.h": "c",
+			"crawler_c": "c",
+			"typeinfo": "c",
+			"global.h": "c",
+			"functional": "c",
+			"array": "c",
+			"string_view": "c",
+			"initializer_list": "c",
+			"ranges": "c",
+			"span": "c",
+			"utility": "c",
+			"htmlparser.h": "c",
+			"curl.h": "c",
+			"stdlib.h": "c",
+			"uri.h": "c",
+			"math.h": "c",
+			"xpath.h": "c",
+			"stddef.h": "c",
+			"deque": "c",
+			"vector": "c",
+			"typeindex": "c",
+			"*.tcc": "c",
+			"cstring": "c",
+			"charconv": "c",
+			"stdint.h": "c",
+			"sstream": "c",
+			"regex": "c",
+			"expected": "c",
+			"list": "c"
+		}
+	}
+}
