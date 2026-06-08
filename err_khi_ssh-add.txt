@@ -1,0 +1,61 @@
+SSH authentication agent does not automatically start when using it from a remote server. This results in the following error message:
+
+    $ git pull
+    Permission denied (publickey).
+    fatal: The remote end hung up unexpectedly
+    $ ssh-add ~/my-ssh-key.pem
+    Could not open a connection to your authentication agent.
+    
+To fix it requires manually starting ssh-agent:
+
+    $ eval `ssh-agent -s`
+    Agent pid 13442
+    $ ssh-add ~/my-ssh-key.pem
+    Identity added: /home/user/my-ssh-key.pem (/home/user/my-ssh-key.pem)
+    $ git pull
+
+
+=================================================================
+#Fixing “WARNING: UNPROTECTED PRIVATE KEY FILE!” on Linux
+
+If you are getting this error then you probably reset the permissions on your hidden .ssh directory in your user folder, and your keys aren’t going to work anymore. It’s very important that these files not be writable by just anybody with a login to the box, so openssh will give you an error if you try to use them.
+
+The full error message:
+
+```sh
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Permissions 0744 for '/home/geek/.ssh/id_rsa' are too open.
+It is recommended that your private key files are NOT accessible by others.
+This private key will be ignored.
+bad permissions: ignore key: /home/geek/.ssh/id_rsa
+```
+
+To fix this, you’ll need to reset the permissions back to default:
+
+```sh
+sudo chmod 600 ~/.ssh/id_rsa
+sudo chmod 600 ~/.ssh/id_rsa.pub
+```
+
+If you are getting another error:
+
+```sh
+Are you sure you want to continue connecting (yes/no)? yes
+Failed to add the host to the list of known hosts (/home/geek/.ssh/known_hosts).
+```
+
+This means that the permissions on that file are also set incorrectly, and can be adjusted with this:
+
+```sh
+sudo chmod 644 ~/.ssh/known_hosts
+```
+
+Finally, you may need to adjust the directory permissions as well:
+
+```sh
+sudo chmod 755 ~/.ssh
+```
+
+This should get you back up and running.

@@ -1,0 +1,18 @@
+Cách cài pip cho python
+
+>pkg install python
+>pkg install python3
+root@murt_asus:/usr/home/murt/GitHub # python
+Python 3.9.18 (main, Jan  6 2024, 01:21:47) 
+[Clang 14.0.5 (https://github.com/llvm/llvm-project.git llvmorg-14.0.5-0-gc1238 on freebsd13
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+root@murt_asus:/usr/home/murt/GitHub # python3
+Python 3.9.18 (main, Jan  6 2024, 01:21:47) 
+[Clang 14.0.5 (https://github.com/llvm/llvm-project.git llvmorg-14.0.5-0-gc1238 on freebsd13
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+Có thể từ version của bản python đã cài đặt, mà ta tìm ra pkg py39-pip 
+>pkg install py39-pip  // Cái này là để cài cho pip
+
+Ví dụ: >pip install mintotp
