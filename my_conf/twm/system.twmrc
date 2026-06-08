@@ -1,0 +1,376 @@
+#*********************************
+# GENERAL SETTINGS
+#*********************************
+AutoRelativeResize # No cross of window edge needed for resize
+DecorateTransients # Also decorate transient windows
+NoBackingStore # Minimize repainting of menus
+NoCaseSensitive # Case ignoring for icon manager
+NoDefaults # No default title buttons, we will define them
+NoGrabServer # Do not grab the server when not needed
+NoHighLight # Dont change border of windows on mouse over
+NoTitleHighlight # No highlight for titlebar of selected window
+OpaqueMove # Move window instead of outline
+RandomPlacement # Windows without geometry are placed randomly
+#RestartPreviousState # Try to restart defaults from last x session
+UsePPosition "on" # Honor placement
+#NoIconManagers # No icon manager is showed
+IconifyByUnMapping # Dont use desktop minimized icons
+#DontMoveOff # Windows can't move outside the screen
+IconManagerGeometry "1200x10+0+1176" 10
+IconManagerDontShow {"conky" "polybar"}
+ClientBorderWidth {"conky" "polybar"}
+#InterpolateMenuColors
+
+#*********************************
+# WINDOW BORDERS ETC
+#*********************************
+BorderWidth 1 # Number of pixels for entire window border
+FramePadding 2 # Number of pixels between titlebar buttons and frame
+MenuBorderWidth 5 # Number of pixels for menu border
+#NoMenuShadows # No shadow behind the popup menu
+TitleButtonBorderWidth 0 # Number of pixels for button border
+ButtonIndent 0 # Larger seems to squash buttons together
+TitlePadding 4 # Number of pixels around title buttons
+
+#*********************************
+# TITLE BAR BUTTONS
+#*********************************
+IconDirectory "/usr/home/murt/online/my_github/teonho/freebsd/twm/icons/"  		   		# Dir for own icon buttons
+LeftTitleButton "resize.xbm"=f.resize	   		# Northwest arrow.xbm file
+LeftTitleButton "wmenu.xbm"=f.menu "WindowMenu"	   	# Burger menu wmenu.xbm file
+RightTitleButton "minimize.xbm"=f.iconify  		# Down chevron .xbm file
+
+# RightTitleButton "maximize.xbm"=f.fullzoom 		# Up chevron .xbm file
+# Above takes 2 clicks to restore [feature]
+# Below takes 1 clicks inc lower function
+
+RightTitleButton "maximize.xbm"=f.function "maximize"   # Up chevron .xbm file
+RightTitleButton "close.xbm"=f.delete      		# X character .xbm file
+Pixmaps { TitleHighlight "titlebar.xbm" }  		# Stippled when enabled
+
+#*********************************
+# COLOR SETTINGS
+#*********************************
+Color {
+BorderColor         "#2c2b2b" # Border colour of all windows
+DefaultBackground   "#2c2b2b" # BG Colour of transient popups
+DefaultForeground   "#C0c0c0" # FG Colour of transient popups
+
+TitleBackground     "#2c2b2b" # Window Titlebar main colour
+TitleForeground     "#C0c0c0" # Window Titlebar text colour
+
+MenuTitleBackground "#2c2b2b" # BG colour of root menu title 
+MenuTitleForeground "#C0c0c0" # Font colour of root menu title
+
+MenuBackground      "#2c2b2b" # BG colour of root menu
+MenuForeground      "#C0c0c0" # Font colour of root menu
+
+MenuBorderColor     "#2c2b2b" # Border colour entire root menu
+MenuShadowColor     "#2c2b2b" # Drop shadow colour of root menu
+
+IconManagerBackground "#2c2b2b"
+IconManagerForeground "#C0c0c0"
+
+PointerForeground "Black"
+PointerBackground "White"
+}
+
+#*********************************
+# FONT SETTINGS
+#*********************************
+MenuFont 	"-adobe-helvetica-medium-r-normal--12-180-*-*-*-*-iso8859-1"
+TitleFont 	"-adobe-helvetica-medium-r-normal--12-180-*-*-*-*-iso8859-1"
+ResizeFont 	"-adobe-helvetica-medium-r-normal--12-180-*-*-*-*-iso8859-1"
+IconManagerFont "-adobe-helvetica-medium-r-normal--12-180-*-*-*-*-iso8859-1"
+
+#*********************************
+# CURSOR ICON SETTINGS
+#*********************************
+Cursors {
+Frame 	"top_left_arrow"
+Title 	"top_left_arrow"
+Icon 	"top_left_arrow"
+IconMgr "top_left_arrow"
+Button 	"right_ptr"
+Menu 	"right_ptr"
+Wait 	"watch"
+Destroy "pirate"
+Resize 	"sizing"
+Move 	"fleur"
+Select 	"plus"
+}
+
+#*********************************
+# NO TITLE BAR SETTINGS
+#*********************************
+NoTitle {
+"polybar"
+"aterm"
+"conky"
+"xclock"
+"xmessage"
+"TWM Icon Manager"
+"mplayer"
+}
+
+#*********************************
+# TAB STYLE TITLE BARS
+#*********************************
+# SqueezeTitle {""} 
+
+#*********************************
+# AUTORAISE WINDOWS
+#*********************************
+# Autoraise {"xterm"}
+
+#*********************************
+#  CURSOR TO WINDOW ON DE-ICONIFY
+#*********************************
+WarpCursor { "xterm" }
+
+#***********************************************************************
+# MOUSE SETTINGS AND WINDOW BEHAVIOURS
+#***********************************************************************
+#  Button1=left, Button2=middle, Button3=right, m=alt, c=ctrl, s=shift
+
+# The root window actions i.e. clicking on the desktop backgound
+# Right click menu ala Fluxbox 
+Button3 = : root : f.menu "RootMenu"
+
+# Wheel button system menu
+# Button2 = : root : f.menu "System"
+
+# Wheel button on Window to bring forward
+Button2 = : window : f.raise
+
+# Left click on desktop to bring up window list
+Button1 = : root : f.menu "defops"
+
+# Left click the window title to lower / raise + gain focus or move
+Movedelta 1
+Button1=	:title: f.function "raise-lower-move"
+Function "raise-lower-move" { f.move f.raiselower }
+
+# Middle click the window title for options for individual windows
+Button2= : title|frame : f.menu "WindowMenu"
+
+# Right click window title to resize the window by mousing beyond frame
+Button3 = : title|frame : f.resize
+
+# Hold alt key and left click to move entire window
+Button1 = m : window : f.move
+
+# Hold shift key and right click / move to resize. Best near edges.
+Button3 = s : window : f.resize
+
+# Hold Alt and Tab cycles through windows bringing up focus
+Function "winup" { f.circleup }
+"Tab" = m : root|window|frame|title : f.function "winup"
+
+# Hold Alt plus left click window title to maximize window vertically
+Button1 = m : title|frame : f.zoom
+
+# Hold Alt plus right click window title to maximize window horizontally
+Button3 = m : title|frame : f.horizoom
+
+# Click to de-iconfy using IconManager
+Button1 = : iconmgr : f.iconify
+
+DefaultFunction f.nop
+
+#
+# And a menus with the usual things
+#
+menu "defops"
+{
+"Twm"	f.title
+"VN lang input"      ("#FF1427":"#2c2b2b")        f.exec "setxkbmap vn"
+"US lang input"      ("#FF1427":"#2c2b2b")        f.exec "setxkbmap us"
+"Iconify"	f.iconify
+"Resize"	f.resize
+"Move"		f.move
+"Raise"		f.raise
+"Lower"		f.lower
+"REBOOT"	("#FF1427":"#2c2b2b")	f.exec "exec doas reboot &"
+"POWEROFF"      ("#FF1427":"#2c2b2b")        f.exec "exec doas poweroff &"
+"SHUTDOWN"      ("#FF1427":"#2c2b2b")        f.exec "exec doas shutdown -p now &"
+"LOGOUT"      ("#FF1427":"#2c2b2b")        f.exec "kill -9 -1"
+"Focus"		f.focus
+"Unfocus"	f.unfocus
+"Show Iconmgr"	f.showiconmgr
+"Hide Iconmgr"	f.hideiconmgr
+""		f.nop
+"Xterm"		f.exec "exec xterm -fg lightgray -bg black -sl 10000000 &"
+""		f.nop
+"Kill"		f.destroy
+"Delete"	f.delete
+""		f.nop
+"Restart"	f.restart
+"Exit"		f.quit
+}
+
+########################### my add #################
+#*********************************************************************
+# KEYBINDINGS AND FUNCTIONS FOR VDESK http://offog.org/code/vdesk.html
+#*********************************************************************
+# Change Virtual Desktops with vdesk
+function "desktop-1" {
+#f.exec "xmessage -center -timeout 1 -buttons OK DESKTOP NO: 1 &"
+f.exec "vdesk 1"
+}
+function "desktop-2" {
+#f.exec "xmessage -center -timeout 1 -buttons OK DESKTOP NO: 2 &"
+f.exec "vdesk 2" 
+}
+function "desktop-3" {
+#f.exec "xmessage -center -timeout 1 -buttons OK DESKTOP NO: 3 &"
+f.exec "vdesk 3" 
+}
+function "desktop-4" {
+#f.exec "xmessage -center -timeout 1 -buttons OK DESKTOP NO: 4 &"
+f.exec "vdesk 4"
+}
+
+"1" = c : all : f.function "desktop-1"
+"2" = c : all : f.function "desktop-2"
+"3" = c : all : f.function "desktop-3"
+"4" = c : all : f.function "desktop-4"
+
+function "next" {
+f.exec "if [ $((`vdesk`)) = 4 ]; then vdesk 1; else vdesk $((`vdesk`+1)); fi"
+#f.exec "xmessage -center -timeout 1 -buttons OK DESKTOP NO: $((`vdesk`)) &"
+#f.exec "A=$((`vdesk`+1)); if [ $A = 5 ] ; then A=1 ; fi ; vdesk $A"
+#f.exec "B=$((`vdesk`)); xmessage -center -timeout 1 -buttons OK DESKTOP NO: $B &"
+}
+function "prev" {
+f.exec "if [ $((`vdesk`)) = 1 ]; then vdesk 4; else vdesk $((`vdesk`-1)); fi"
+#f.exec "xmessage -center -timeout 1 -buttons OK DESKTOP NO: $((`vdesk`)) &"
+#f.exec "A=$((`vdesk`-1)); if [ $A = 0 ] ; then A=4 ; fi ; vdesk $A"
+#f.exec "B=$((`vdesk`)); xmessage -center -timeout 1 -buttons OK DESKTOP NO: $B &"
+}
+
+"Right" = c : all : f.function "next"
+"Left"  = c : all : f.function "prev"
+
+#*********************************
+# THE POPUP DESKTOP MENU
+#*********************************
+menu "RootMenu" {
+"MyMenu"   f.title
+"Editor"    f.exec "xfw &"
+#"Editor"    f.exec "adie &"
+"Fileman"    ("#1A88F2":"#2c2b2b") f.exec "xfe &"
+"Terminal"   ("#EA9C10":"#2c2b2b") f.exec "xterm -fg lightgray -bg black -sl 10000000 &"
+"—————"	     f.nop
+"WindowMenu"	("#1A88F2":"#2c2b2b")   f.menu "WindowMenu"
+"Internet"   f.menu "Internet"
+"MultiMedia" f.menu "Multimedia"
+"Graphics"   f.menu "Graphics"
+"Utilities"  f.menu "Utilities"
+"Office"     f.menu "Office"
+"Games"      f.menu "Games"
+"Systems"	("#2DB753":"#2c2b2b")	f.menu "System"
+"—————"	     f.nop
+#"Command"    ("#2DB753":"#2c2b2b") f.exec "xterm -fg dimgrey -bg white -geometry 25x1+840+1150 -name Run -title Run -e ~/.twm/scripts/getrun &"
+"Exit"       ("#FF1427":"#2c2b2b") f.quit
+}
+menu "System" {
+">> Load Config" f.twmrc
+">> Edit Config" f.exec "xfw ~/.twmrc &"
+">> Hide Icomgr" f.hideiconmgr
+">> End Task"    f.exec "xkill &"
+">> Restart"     f.restart
+">> LCD Off"     f.exec "xset -display :0 dpms force off &"
+">> Saver 2m" 	 f.exec "xset s 120 120 -display $DISPLAY &"
+">> Saver 10m"   f.exec "xset s 600 600 -display $DISPLAY &"
+}
+menu "WindowMenu" {
+"Vertical"   f.zoom
+"Horizontal" f.horizoom
+"Left"       f.leftzoom
+"Right"      f.rightzoom
+"Top"        f.topzoom
+"Bottom"     f.bottomzoom
+"AutoRaise"  f.autoraise
+"Sticky"     f.exec "/home/orby/.twm/scripts/stickwin &"
+"Sendto 1"   f.exec "/home/orby/.twm/scripts/sendto-1 &"
+"Sendto 2"   f.exec "/home/orby/.twm/scripts/sendto-2 &"
+"Sendto 3"   f.exec "/home/orby/.twm/scripts/sendto-3 &"
+"Sendto 4"   f.exec "/home/orby/.twm/scripts/sendto-4 &"
+}
+menu "Internet" {
+"Chromium"       ("#2DB753":"#2c2b2b")   !"chrome &"
+"Firefox"        ("#2DB753":"#2c2b2b")   !"firefox &"
+"b:b: Web Browser"  !"firefox &"
+"b:b: Text Browser" !"links -g http://www.google.com &"
+"b:b: Email Client" !"seamonkey -mail &"
+"b:b: FTP Client"   !"gftp &"
+"b:b: SSH Client"   !"putty &"
+}
+menu "Multimedia" {
+"b:b: Dead Beef"    !"deadbeef https://somafm.com/groovesalad.pls &"
+"b:b: Media Player" !"gmplayer &"
+"b:b: Audio Mixer"  !"xterm -geometry 80x20+300+300 -e alsamixer &"
+"b:b: Sound App"    ! "pavucontrol &"
+}
+menu "Graphics" {
+"b:b: WebCam"	("#86D3F3":"#0A234B") !"pwcview &"
+"b:b: mtPaint" !"mtpaint &"
+"b:b: Colours" !"gcolor2 &"
+"b:b: Sshot!"  !"xterm -bg black -fg grey -e scrot -d 6 -c -e 'mv $f ~/' &"
+"b:b: Magnify" !"xmag &"
+"b:b: X Font"  !"xfontsel &"
+"b:b: X Fig"   !"xfig &"
+}
+menu "Utilities" {
+"b:b: Root XTerm"  f.exec "xterm -fg goldenrod -bg black -e su - &"
+"b:b: ATerm Tsp+"  f.exec "aterm -tr +sb -bw 0 -fg '#a9a9a9' -fn Terminus &"
+"bbbbb"	 	 f.nop
+"b:b: TWM Manpage" f.exec "xterm -fg black -bg white -geometry 100x90 -T 'TWM Manpage' -e 'man twm' &"
+"b:b: Xman Viewer" f.exec "/home/orby/.twm/scripts/xman &"
+"bbbbb"	 	 f.nop
+"b:b: Weather1"    f.exec "while metar get | xmessage -center -buttons OK:1 -file - ; do :; done &"
+"b:b: Weather2"    f.exec "xterm -geometry 125x45 -T 'Weather' -e '~/.twm/scripts/weather' &"
+"bbbbb"	 	 f.nop
+"b:b: Htop"        f.exec "xterm -e htop &"
+"b:b: Bpytop"      f.exec "xterm -e bpytop &"
+"b:b: Bashtop"     f.exec "xterm -e bashtop &"
+"b:b: Neofetch"    f.exec "xterm -e /home/orby/.twm/scripts/neofetch.sh &"
+"b:b: Archey3"     f.exec "xterm -e /home/orby/.twm/scripts/archey3.sh &"
+"bbbbb"	 	 f.nop
+"b:b: Stick Conky" f.exec "vdesk 0 0xa00001 &" 
+"b:b: Stick Polybar " f.exec "vdesk 0 0xa00002 &" 
+"b:b: Clipboard"   f.exec "xclipboard &"
+"bbbbb"	 	 f.nop
+"b:b: About..."	 f.identify
+"b:b: Env Vars"	 f.exec  "env | xmessage -nearmouse -buttons OK:1 -file - &"
+"b:b: Wallpaper"	("#86D3F3":"#0A234B")   f.menu "Wallpaper"
+}
+
+menu "Wallpaper" {
+"b:b: Set Blue Elipse" !"fbsetroot -gradient Elliptic -from '#2d527f' -to '#859ac0' &"
+"b:b: Set NeXTStep"    !"hsetroot -solid '#545476' &"
+"b:b: Set MacOS9B"     !"hsetroot -solid '#54679c' &"
+"b:b: Set Win2KC"      !"hsetroot -solid '#3A6EA5' &"
+"b:b: Set Slate"       !"hsetroot -solid '#4A5562' &"
+}
+
+menu "Office" {
+"VScode"	("#2DB753":"#2c2b2b")  f.exec "exec vscode &"
+"b:b: Wordpro"     f.exec "~/textmaker21free &"
+"b:b: Ssheets"     f.exec "~/planmaker21free &"
+"b:b: Presents"    f.exec "~/presentations21free &"
+"bbbbb"	         f.nop
+"b:b: PDF Docs"    f.exec "xpdf &"
+#"b:b: PDF Docs"    f.exec "xterm -fg black -bg white -geometry 100x90 -T 'MuPDF Man Page' -e 'man mupdf' &"
+"b:b: Calculator"  f.exec "xcalc &"
+"b:b: Calendar"    f.exec "cal -y -w | xmessage -nearmouse -buttons OK:1 -file - &"
+"b:b: Fox Calc"    f.exec "calculator &"
+"b:b: Big Clock"	 f.exec "xclock -digital -chime -bg '#2c2b2b' -fg '#c0c0c0' -strftime %T -update 1 -face 'ter-u32b:style=normal:pixelsize=30' &"
+}
+
+menu "Games" {
+"b:b: Galacta" !"padsp xgalaga -mouse -window &"
+"b:b: Galacta++" !"padsp xgalaga++ -mouse -window &"
+"b:b: Xmahjong" !"xmahjongg --background grass --tileset gnome &"
+}
