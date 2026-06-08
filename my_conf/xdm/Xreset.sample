@@ -1,0 +1,5 @@
+#!/bin/sh
+# Deregister a login. (Derived from TakeConsole as follows:)
+#
+/usr/local/bin/sessreg -d   \
+	-x /usr/local/etc/X11/xdm/Xservers -l $DISPLAY -h "" $USER
